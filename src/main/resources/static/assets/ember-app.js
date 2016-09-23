@@ -253,7 +253,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("ember-app/app")["default"].create({"name":"ember-app","version":"0.0.0+6a12e82b"});
+  require("ember-app/app")["default"].create({"name":"ember-app","version":"0.0.0+b412eaf2"});
 }
 
 /* jshint ignore:end */
