@@ -4,3 +4,20 @@ target/
 .factorypath
 .project
 .settings/
+
+
+# compiled output
+public/ember-app/dist
+public/ember-app/tmp
+
+# dependencies
+public/ember-app/node_modules
+public/ember-app/bower_components
+
+# misc
+public/ember-app/.sass-cache
+public/ember-app/connect.lock
+public/ember-app/coverage/*
+public/ember-app/libpeerconnection.log
+public/ember-app/npm-debug.log
+public/ember-app/testem.log
