@@ -6,45 +6,45 @@
 
 /* jshint ignore:end */
 
-define('starter-app/app', ['exports', 'ember', 'starter-app/resolver', 'ember-load-initializers', 'starter-app/config/environment'], function (exports, _ember, _starterAppResolver, _emberLoadInitializers, _starterAppConfigEnvironment) {
+define('ember-app/app', ['exports', 'ember', 'ember-app/resolver', 'ember-load-initializers', 'ember-app/config/environment'], function (exports, _ember, _emberAppResolver, _emberLoadInitializers, _emberAppConfigEnvironment) {
 
   var App = undefined;
 
   _ember['default'].MODEL_FACTORY_INJECTIONS = true;
 
   App = _ember['default'].Application.extend({
-    modulePrefix: _starterAppConfigEnvironment['default'].modulePrefix,
-    podModulePrefix: _starterAppConfigEnvironment['default'].podModulePrefix,
-    Resolver: _starterAppResolver['default']
+    modulePrefix: _emberAppConfigEnvironment['default'].modulePrefix,
+    podModulePrefix: _emberAppConfigEnvironment['default'].podModulePrefix,
+    Resolver: _emberAppResolver['default']
   });
 
-  (0, _emberLoadInitializers['default'])(App, _starterAppConfigEnvironment['default'].modulePrefix);
+  (0, _emberLoadInitializers['default'])(App, _emberAppConfigEnvironment['default'].modulePrefix);
 
   exports['default'] = App;
 });
-define('starter-app/components/app-version', ['exports', 'ember-cli-app-version/components/app-version', 'starter-app/config/environment'], function (exports, _emberCliAppVersionComponentsAppVersion, _starterAppConfigEnvironment) {
+define('ember-app/components/app-version', ['exports', 'ember-cli-app-version/components/app-version', 'ember-app/config/environment'], function (exports, _emberCliAppVersionComponentsAppVersion, _emberAppConfigEnvironment) {
 
-  var name = _starterAppConfigEnvironment['default'].APP.name;
-  var version = _starterAppConfigEnvironment['default'].APP.version;
+  var name = _emberAppConfigEnvironment['default'].APP.name;
+  var version = _emberAppConfigEnvironment['default'].APP.version;
 
   exports['default'] = _emberCliAppVersionComponentsAppVersion['default'].extend({
     version: version,
     name: name
   });
 });
-define('starter-app/helpers/pluralize', ['exports', 'ember-inflector/lib/helpers/pluralize'], function (exports, _emberInflectorLibHelpersPluralize) {
+define('ember-app/helpers/pluralize', ['exports', 'ember-inflector/lib/helpers/pluralize'], function (exports, _emberInflectorLibHelpersPluralize) {
   exports['default'] = _emberInflectorLibHelpersPluralize['default'];
 });
-define('starter-app/helpers/singularize', ['exports', 'ember-inflector/lib/helpers/singularize'], function (exports, _emberInflectorLibHelpersSingularize) {
+define('ember-app/helpers/singularize', ['exports', 'ember-inflector/lib/helpers/singularize'], function (exports, _emberInflectorLibHelpersSingularize) {
   exports['default'] = _emberInflectorLibHelpersSingularize['default'];
 });
-define('starter-app/initializers/app-version', ['exports', 'ember-cli-app-version/initializer-factory', 'starter-app/config/environment'], function (exports, _emberCliAppVersionInitializerFactory, _starterAppConfigEnvironment) {
+define('ember-app/initializers/app-version', ['exports', 'ember-cli-app-version/initializer-factory', 'ember-app/config/environment'], function (exports, _emberCliAppVersionInitializerFactory, _emberAppConfigEnvironment) {
   exports['default'] = {
     name: 'App Version',
-    initialize: (0, _emberCliAppVersionInitializerFactory['default'])(_starterAppConfigEnvironment['default'].APP.name, _starterAppConfigEnvironment['default'].APP.version)
+    initialize: (0, _emberCliAppVersionInitializerFactory['default'])(_emberAppConfigEnvironment['default'].APP.name, _emberAppConfigEnvironment['default'].APP.version)
   };
 });
-define('starter-app/initializers/container-debug-adapter', ['exports', 'ember-resolver/container-debug-adapter'], function (exports, _emberResolverContainerDebugAdapter) {
+define('ember-app/initializers/container-debug-adapter', ['exports', 'ember-resolver/container-debug-adapter'], function (exports, _emberResolverContainerDebugAdapter) {
   exports['default'] = {
     name: 'container-debug-adapter',
 
@@ -56,7 +56,7 @@ define('starter-app/initializers/container-debug-adapter', ['exports', 'ember-re
     }
   };
 });
-define('starter-app/initializers/data-adapter', ['exports', 'ember'], function (exports, _ember) {
+define('ember-app/initializers/data-adapter', ['exports', 'ember'], function (exports, _ember) {
 
   /*
     This initializer is here to keep backwards compatibility with code depending
@@ -71,7 +71,7 @@ define('starter-app/initializers/data-adapter', ['exports', 'ember'], function (
     initialize: _ember['default'].K
   };
 });
-define('starter-app/initializers/ember-data', ['exports', 'ember-data/setup-container', 'ember-data/-private/core'], function (exports, _emberDataSetupContainer, _emberDataPrivateCore) {
+define('ember-app/initializers/ember-data', ['exports', 'ember-data/setup-container', 'ember-data/-private/core'], function (exports, _emberDataSetupContainer, _emberDataPrivateCore) {
 
   /*
   
@@ -110,19 +110,19 @@ define('starter-app/initializers/ember-data', ['exports', 'ember-data/setup-cont
     initialize: _emberDataSetupContainer['default']
   };
 });
-define('starter-app/initializers/export-application-global', ['exports', 'ember', 'starter-app/config/environment'], function (exports, _ember, _starterAppConfigEnvironment) {
+define('ember-app/initializers/export-application-global', ['exports', 'ember', 'ember-app/config/environment'], function (exports, _ember, _emberAppConfigEnvironment) {
   exports.initialize = initialize;
 
   function initialize() {
     var application = arguments[1] || arguments[0];
-    if (_starterAppConfigEnvironment['default'].exportApplicationGlobal !== false) {
-      var value = _starterAppConfigEnvironment['default'].exportApplicationGlobal;
+    if (_emberAppConfigEnvironment['default'].exportApplicationGlobal !== false) {
+      var value = _emberAppConfigEnvironment['default'].exportApplicationGlobal;
       var globalName;
 
       if (typeof value === 'string') {
         globalName = value;
       } else {
-        globalName = _ember['default'].String.classify(_starterAppConfigEnvironment['default'].modulePrefix);
+        globalName = _ember['default'].String.classify(_emberAppConfigEnvironment['default'].modulePrefix);
       }
 
       if (!window[globalName]) {
@@ -144,7 +144,7 @@ define('starter-app/initializers/export-application-global', ['exports', 'ember'
     initialize: initialize
   };
 });
-define('starter-app/initializers/injectStore', ['exports', 'ember'], function (exports, _ember) {
+define('ember-app/initializers/injectStore', ['exports', 'ember'], function (exports, _ember) {
 
   /*
     This initializer is here to keep backwards compatibility with code depending
@@ -159,7 +159,7 @@ define('starter-app/initializers/injectStore', ['exports', 'ember'], function (e
     initialize: _ember['default'].K
   };
 });
-define('starter-app/initializers/store', ['exports', 'ember'], function (exports, _ember) {
+define('ember-app/initializers/store', ['exports', 'ember'], function (exports, _ember) {
 
   /*
     This initializer is here to keep backwards compatibility with code depending
@@ -174,7 +174,7 @@ define('starter-app/initializers/store', ['exports', 'ember'], function (exports
     initialize: _ember['default'].K
   };
 });
-define('starter-app/initializers/transforms', ['exports', 'ember'], function (exports, _ember) {
+define('ember-app/initializers/transforms', ['exports', 'ember'], function (exports, _ember) {
 
   /*
     This initializer is here to keep backwards compatibility with code depending
@@ -189,27 +189,27 @@ define('starter-app/initializers/transforms', ['exports', 'ember'], function (ex
     initialize: _ember['default'].K
   };
 });
-define("starter-app/instance-initializers/ember-data", ["exports", "ember-data/-private/instance-initializers/initialize-store-service"], function (exports, _emberDataPrivateInstanceInitializersInitializeStoreService) {
+define("ember-app/instance-initializers/ember-data", ["exports", "ember-data/-private/instance-initializers/initialize-store-service"], function (exports, _emberDataPrivateInstanceInitializersInitializeStoreService) {
   exports["default"] = {
     name: "ember-data",
     initialize: _emberDataPrivateInstanceInitializersInitializeStoreService["default"]
   };
 });
-define('starter-app/resolver', ['exports', 'ember-resolver'], function (exports, _emberResolver) {
+define('ember-app/resolver', ['exports', 'ember-resolver'], function (exports, _emberResolver) {
   exports['default'] = _emberResolver['default'];
 });
-define('starter-app/router', ['exports', 'ember', 'starter-app/config/environment'], function (exports, _ember, _starterAppConfigEnvironment) {
+define('ember-app/router', ['exports', 'ember', 'ember-app/config/environment'], function (exports, _ember, _emberAppConfigEnvironment) {
 
   var Router = _ember['default'].Router.extend({
-    location: _starterAppConfigEnvironment['default'].locationType,
-    rootURL: _starterAppConfigEnvironment['default'].rootURL
+    location: _emberAppConfigEnvironment['default'].locationType,
+    rootURL: _emberAppConfigEnvironment['default'].rootURL
   });
 
   Router.map(function () {});
 
   exports['default'] = Router;
 });
-define('starter-app/services/ajax', ['exports', 'ember-ajax/services/ajax'], function (exports, _emberAjaxServicesAjax) {
+define('ember-app/services/ajax', ['exports', 'ember-ajax/services/ajax'], function (exports, _emberAjaxServicesAjax) {
   Object.defineProperty(exports, 'default', {
     enumerable: true,
     get: function get() {
@@ -225,8 +225,8 @@ define('starter-app/services/ajax', ['exports', 'ember-ajax/services/ajax'], fun
 
 /* jshint ignore:start */
 
-define('starter-app/config/environment', ['ember'], function(Ember) {
-  var prefix = 'starter-app';
+define('ember-app/config/environment', ['ember'], function(Ember) {
+  var prefix = 'ember-app';
 /* jshint ignore:start */
 
 try {
@@ -253,8 +253,8 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("starter-app/app")["default"].create({"name":"starter-app","version":"0.0.0+bb031227"});
+  require("ember-app/app")["default"].create({"name":"ember-app","version":"0.0.0+6a12e82b"});
 }
 
 /* jshint ignore:end */
-//# sourceMappingURL=starter-app.map
+//# sourceMappingURL=ember-app.map

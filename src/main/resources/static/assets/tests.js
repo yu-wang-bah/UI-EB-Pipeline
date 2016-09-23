@@ -1,6 +1,6 @@
 'use strict';
 
-define('starter-app/tests/app.jshint', ['exports'], function (exports) {
+define('ember-app/tests/app.jshint', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint | app.js');
@@ -9,14 +9,14 @@ define('starter-app/tests/app.jshint', ['exports'], function (exports) {
     assert.ok(true, 'app.js should pass jshint.');
   });
 });
-define('starter-app/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
+define('ember-app/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = destroyApp;
 
   function destroyApp(application) {
     _ember['default'].run(application, 'destroy');
   }
 });
-define('starter-app/tests/helpers/destroy-app.jshint', ['exports'], function (exports) {
+define('ember-app/tests/helpers/destroy-app.jshint', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint | helpers/destroy-app.js');
@@ -25,7 +25,7 @@ define('starter-app/tests/helpers/destroy-app.jshint', ['exports'], function (ex
     assert.ok(true, 'helpers/destroy-app.js should pass jshint.');
   });
 });
-define('starter-app/tests/helpers/module-for-acceptance', ['exports', 'qunit', 'ember', 'starter-app/tests/helpers/start-app', 'starter-app/tests/helpers/destroy-app'], function (exports, _qunit, _ember, _starterAppTestsHelpersStartApp, _starterAppTestsHelpersDestroyApp) {
+define('ember-app/tests/helpers/module-for-acceptance', ['exports', 'qunit', 'ember', 'ember-app/tests/helpers/start-app', 'ember-app/tests/helpers/destroy-app'], function (exports, _qunit, _ember, _emberAppTestsHelpersStartApp, _emberAppTestsHelpersDestroyApp) {
   var Promise = _ember['default'].RSVP.Promise;
 
   exports['default'] = function (name) {
@@ -33,7 +33,7 @@ define('starter-app/tests/helpers/module-for-acceptance', ['exports', 'qunit', '
 
     (0, _qunit.module)(name, {
       beforeEach: function beforeEach() {
-        this.application = (0, _starterAppTestsHelpersStartApp['default'])();
+        this.application = (0, _emberAppTestsHelpersStartApp['default'])();
 
         if (options.beforeEach) {
           return options.beforeEach.apply(this, arguments);
@@ -45,13 +45,13 @@ define('starter-app/tests/helpers/module-for-acceptance', ['exports', 'qunit', '
 
         var afterEach = options.afterEach && options.afterEach.apply(this, arguments);
         return Promise.resolve(afterEach).then(function () {
-          return (0, _starterAppTestsHelpersDestroyApp['default'])(_this.application);
+          return (0, _emberAppTestsHelpersDestroyApp['default'])(_this.application);
         });
       }
     });
   };
 });
-define('starter-app/tests/helpers/module-for-acceptance.jshint', ['exports'], function (exports) {
+define('ember-app/tests/helpers/module-for-acceptance.jshint', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint | helpers/module-for-acceptance.js');
@@ -60,18 +60,18 @@ define('starter-app/tests/helpers/module-for-acceptance.jshint', ['exports'], fu
     assert.ok(true, 'helpers/module-for-acceptance.js should pass jshint.');
   });
 });
-define('starter-app/tests/helpers/resolver', ['exports', 'starter-app/resolver', 'starter-app/config/environment'], function (exports, _starterAppResolver, _starterAppConfigEnvironment) {
+define('ember-app/tests/helpers/resolver', ['exports', 'ember-app/resolver', 'ember-app/config/environment'], function (exports, _emberAppResolver, _emberAppConfigEnvironment) {
 
-  var resolver = _starterAppResolver['default'].create();
+  var resolver = _emberAppResolver['default'].create();
 
   resolver.namespace = {
-    modulePrefix: _starterAppConfigEnvironment['default'].modulePrefix,
-    podModulePrefix: _starterAppConfigEnvironment['default'].podModulePrefix
+    modulePrefix: _emberAppConfigEnvironment['default'].modulePrefix,
+    podModulePrefix: _emberAppConfigEnvironment['default'].podModulePrefix
   };
 
   exports['default'] = resolver;
 });
-define('starter-app/tests/helpers/resolver.jshint', ['exports'], function (exports) {
+define('ember-app/tests/helpers/resolver.jshint', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint | helpers/resolver.js');
@@ -80,17 +80,17 @@ define('starter-app/tests/helpers/resolver.jshint', ['exports'], function (expor
     assert.ok(true, 'helpers/resolver.js should pass jshint.');
   });
 });
-define('starter-app/tests/helpers/start-app', ['exports', 'ember', 'starter-app/app', 'starter-app/config/environment'], function (exports, _ember, _starterAppApp, _starterAppConfigEnvironment) {
+define('ember-app/tests/helpers/start-app', ['exports', 'ember', 'ember-app/app', 'ember-app/config/environment'], function (exports, _ember, _emberAppApp, _emberAppConfigEnvironment) {
   exports['default'] = startApp;
 
   function startApp(attrs) {
     var application = undefined;
 
-    var attributes = _ember['default'].merge({}, _starterAppConfigEnvironment['default'].APP);
+    var attributes = _ember['default'].merge({}, _emberAppConfigEnvironment['default'].APP);
     attributes = _ember['default'].merge(attributes, attrs); // use defaults, but you can override;
 
     _ember['default'].run(function () {
-      application = _starterAppApp['default'].create(attributes);
+      application = _emberAppApp['default'].create(attributes);
       application.setupForTesting();
       application.injectTestHelpers();
     });
@@ -98,7 +98,7 @@ define('starter-app/tests/helpers/start-app', ['exports', 'ember', 'starter-app/
     return application;
   }
 });
-define('starter-app/tests/helpers/start-app.jshint', ['exports'], function (exports) {
+define('ember-app/tests/helpers/start-app.jshint', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint | helpers/start-app.js');
@@ -107,7 +107,7 @@ define('starter-app/tests/helpers/start-app.jshint', ['exports'], function (expo
     assert.ok(true, 'helpers/start-app.js should pass jshint.');
   });
 });
-define('starter-app/tests/resolver.jshint', ['exports'], function (exports) {
+define('ember-app/tests/resolver.jshint', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint | resolver.js');
@@ -116,7 +116,7 @@ define('starter-app/tests/resolver.jshint', ['exports'], function (exports) {
     assert.ok(true, 'resolver.js should pass jshint.');
   });
 });
-define('starter-app/tests/router.jshint', ['exports'], function (exports) {
+define('ember-app/tests/router.jshint', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint | router.js');
@@ -125,11 +125,11 @@ define('starter-app/tests/router.jshint', ['exports'], function (exports) {
     assert.ok(true, 'router.js should pass jshint.');
   });
 });
-define('starter-app/tests/test-helper', ['exports', 'starter-app/tests/helpers/resolver', 'ember-qunit'], function (exports, _starterAppTestsHelpersResolver, _emberQunit) {
+define('ember-app/tests/test-helper', ['exports', 'ember-app/tests/helpers/resolver', 'ember-qunit'], function (exports, _emberAppTestsHelpersResolver, _emberQunit) {
 
-  (0, _emberQunit.setResolver)(_starterAppTestsHelpersResolver['default']);
+  (0, _emberQunit.setResolver)(_emberAppTestsHelpersResolver['default']);
 });
-define('starter-app/tests/test-helper.jshint', ['exports'], function (exports) {
+define('ember-app/tests/test-helper.jshint', ['exports'], function (exports) {
   'use strict';
 
   QUnit.module('JSHint | test-helper.js');
@@ -140,7 +140,7 @@ define('starter-app/tests/test-helper.jshint', ['exports'], function (exports) {
 });
 /* jshint ignore:start */
 
-require('starter-app/tests/test-helper');
+require('ember-app/tests/test-helper');
 EmberENV.TESTS_FILE_LOADED = true;
 
 /* jshint ignore:end */
