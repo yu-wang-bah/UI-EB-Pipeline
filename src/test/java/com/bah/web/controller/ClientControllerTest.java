@@ -1,5 +1,6 @@
 package com.bah.web.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.bah.domain.model.Client;
 import com.bah.service.CreateClientService;
@@ -35,32 +36,56 @@ public class ClientControllerTest {
     ObjectMapper objectMapper;
 
     @Test
-    public void testCreateClientSuccessfully() throws Exception {
+    public void testCreateClientSuccessfully()  {
         given(createClientServiceMock.createClient("Foo")).willReturn(new Client("Foo"));
 
-        mockMvc.perform(post("/clients")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(new CreateClientRequest("Foo"))))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.name", is("Foo")))
-                .andExpect(jsonPath("$.number", notNullValue()));
+        try {
+			mockMvc.perform(post("/clients")
+			        .contentType(MediaType.APPLICATION_JSON)
+			        .content(objectMapper.writeValueAsBytes(new CreateClientRequest("Foo"))))
+			        .andExpect(status().isCreated())
+			        .andExpect(jsonPath("$.name", is("Foo")))
+			        .andExpect(jsonPath("$.number", notNullValue()));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @Test
-    public void testCreateClientWithEmptyName() throws Exception {
-        mockMvc.perform(post("/clients")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsBytes(new CreateClientRequest(""))))
-            .andExpect(status().isBadRequest());
+    public void testCreateClientWithEmptyName()  {
+        try {
+			mockMvc.perform(post("/clients")
+			    .contentType(MediaType.APPLICATION_JSON)
+			    .content(objectMapper.writeValueAsBytes(new CreateClientRequest(""))))
+			    .andExpect(status().isBadRequest());
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @Test
-    public void testCreateClientWithExistingName() throws Exception {
+    public void testCreateClientWithExistingName()  {
         given(createClientServiceMock.createClient("Keith")).willThrow(new ClientNameAlreadyExistsException());
 
-        mockMvc.perform(post("/clients")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsBytes(new CreateClientRequest("Keith"))))
-            .andExpect(status().isConflict());
+        try {
+			mockMvc.perform(post("/clients")
+			    .contentType(MediaType.APPLICATION_JSON)
+			    .content(objectMapper.writeValueAsBytes(new CreateClientRequest("Keith"))))
+			    .andExpect(status().isConflict());
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
