@@ -8,6 +8,8 @@ import com.bah.service.exception.ClientNameAlreadyExistsException;
 import com.bah.web.to.CreateClientRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,6 +36,9 @@ public class ClientControllerTest {
 
     @Autowired
     ObjectMapper objectMapper;
+    
+    private static final Logger logger = LoggerFactory.getLogger(ClientControllerTest.class);
+
 
     @Test
     public void testCreateClientSuccessfully()  {
@@ -47,11 +52,9 @@ public class ClientControllerTest {
 			        .andExpect(jsonPath("$.name", is("Foo")))
 			        .andExpect(jsonPath("$.number", notNullValue()));
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("error happened in the ClientControllerTest class", e);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("error happened in the ClientControllerTest class", e);
 		}
     }
 
@@ -63,11 +66,11 @@ public class ClientControllerTest {
 			    .content(objectMapper.writeValueAsBytes(new CreateClientRequest(""))))
 			    .andExpect(status().isBadRequest());
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("error happened in the ClientControllerTest class", e);
+
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("error happened in the ClientControllerTest class", e);
+
 		}
     }
 
@@ -81,11 +84,11 @@ public class ClientControllerTest {
 			    .content(objectMapper.writeValueAsBytes(new CreateClientRequest("Keith"))))
 			    .andExpect(status().isConflict());
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("error happened in the ClientControllerTest class", e);
+
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("error happened in the ClientControllerTest class", e);
+
 		}
     }
 }
